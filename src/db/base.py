@@ -15,14 +15,14 @@ SessionFactory = async_sessionmaker(bind=engine)
 class Base(DeclarativeBase):
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(server_default=func.now(),
-                                                 onupdate=func.now())
+                                                 server_onupdate=func.now())
 
 
-class BaseWithIntPK(Base):
+class BaseWithIntPK:
     id: Mapped[int] = mapped_column(primary_key=True)
 
 
-class BaseWithUUIDPK(Base):
+class BaseWithUUIDPK:
     id: Mapped[UUID] = mapped_column(type_=SA_UUID,
                                      default=uuid4,
                                      primary_key=True)
