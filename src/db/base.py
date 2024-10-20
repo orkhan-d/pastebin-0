@@ -26,3 +26,8 @@ class BaseWithUUIDPK:
     id: Mapped[UUID] = mapped_column(type_=SA_UUID,
                                      default=uuid4,
                                      primary_key=True)
+
+
+async def get_db_session():
+    async with SessionFactory() as session:
+        yield session
