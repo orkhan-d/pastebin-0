@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     S3_ACCESS_KEY: str
     S3_SECRET_KEY: str
     S3_FILE_PREFIX: str
+    S3_BUCKET_NAME: str
 
     class Config:
         extra = 'ignore'
