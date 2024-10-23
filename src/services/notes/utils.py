@@ -1,5 +1,6 @@
 from uuid import UUID
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.services.notes.models import Note
@@ -20,3 +21,11 @@ async def create_note_db(data: CreateNoteSchema,
     await session.refresh(note)
 
     return note
+
+
+async def get_note_by_url(url: str,
+                          session: AsyncSession):
+    stmt = (select(Note.title, Note.s3_filename).
+            where(Note.url == url))
+    result = await session.execute(stmt)
+    return result.one_or_none()
