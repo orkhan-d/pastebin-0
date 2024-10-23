@@ -18,3 +18,9 @@ class S3:
             async with aiofiles.open(filename, mode='rb') as file:
                 await s3.upload_fileobj(file, settings.S3_BUCKET_NAME, filename)
                 return filename
+
+    async def download_file(self, filename: str):
+        async with self.get_client() as s3:
+            async with aiofiles.open(filename, mode='wb') as file:
+                await s3.download_fileobj(settings.S3_BUCKET_NAME, filename, file)
+                return filename
