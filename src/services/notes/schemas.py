@@ -9,5 +9,9 @@ class CreateNoteSchema(BaseNoteSchema):
     content: str
 
 
-class NoteResponse(BaseModel):
+class NoteResponse(BaseNoteSchema):
+    content: str
+
+
+class CreatedNoteResponse(NoteResponse):
     url: str
