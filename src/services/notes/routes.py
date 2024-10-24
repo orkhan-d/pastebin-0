@@ -7,7 +7,7 @@ from src.services.notes import errors as note_errors
 import src.errors as errors
 
 from src.db.base import get_db_session
-from src.services.notes.utils import create_note_db, get_note_by_url
+from src.services.notes.utils import create_note_db, get_note_by_url, generate_hash_from_id
 
 
 import os
@@ -38,7 +38,7 @@ async def create_note(data: schemas.CreateNoteSchema,
 
         return schemas.CreatedNoteResponse(title=data.title,
                                            content=data.content,
-                                           url=note.url)
+                                           url=generate_hash_from_id(note.id.int))
     except Exception as e:
         raise errors.InternalServerError(str(e))
     finally:
