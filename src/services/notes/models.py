@@ -7,4 +7,3 @@ class Note(BaseWithUUIDPK, Base):
 
     title: Mapped[str] = mapped_column()
     s3_filename: Mapped[str] = mapped_column()
-    url: Mapped[str] = mapped_column()
